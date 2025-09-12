@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 use App\models\Job;
 
@@ -22,3 +23,6 @@ Route::get('/jobs/{id}', function ($id) {
 Route::get('/contact', function () {
     return view('contact');
 });
+
+Route::get('/testpage', [JobController::class, 'index']);
+Route::post('/testpage', [JobController::class, 'addjob']);
