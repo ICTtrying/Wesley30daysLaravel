@@ -7,8 +7,8 @@
     padding: 32px 24px;
     background: linear-gradient(135deg, #fdf6e3 0%, #f5e9c6 100%);
     border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-    font-family: 'Segoe UI', Arial, sans-serif;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .Addjobform input,
@@ -42,4 +42,22 @@
 
 .Addjobform button:hover {
     background: #a68c4a;
+}
+.page {
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.table-jobs {
+    width: 70%;
+    border-collapse: collapse;
+    margin: 40px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(to right, #fff8e4, #f1d98f);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }

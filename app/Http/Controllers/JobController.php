@@ -20,9 +20,10 @@ class JobController extends Controller
             'salary' => 'required|numeric',
         ]);
 
-        job::create ([
+        Job::create ([
             'title' => $request->input('title'),
             'salary' => $request->input('salary'),
+            'employer_id' => rand(1, 10) // Random employer_id for demonstration
         ]);
         return redirect('testpage')->with('success', 'Job added!');
     }

@@ -1,39 +1,42 @@
 <x-layout>
     <x-slot:heading>Test Page</x-slot:heading>
-
-    <p>doe wat je wil hier. <strong>NO RULES HEHEHE</strong></p>
-    <br>
-    <h1>Job Listings</h1>
-    <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
+    <div class="page">
+        <p>doe wat je wil hier. <strong>NO RULES HEHEHE</strong></p>
+        <br>
+        <h1>Job Listings</h1>
+        <table border="1" cellpadding="8" cellspacing="0" class="table-jobs">
+            <thead>
             <tr>
                 <th>ID</th>
+                <th>Comany</th>
                 <th>Title</th>
                 <th>Salary</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             @foreach ($jobs as $job)
                 <tr>
-                    <td>{{ $job->id }}</td>
-                    <td>{{ $job->title }}</td>
-                    <td>{{ $job->salary }}</td>
+                <td>{{ $job->id }}</td>
+                <td>{{ $job->employer->name }}</td>
+                <td>{{ $job->title }}</td>
+                <td>{{ $job->salary }}</td>
                 </tr>
             @endforeach
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <p class="text-4xl font-bold">add a job</p>
+        <p class="text-4xl font-bold">add a job</p>
 
-    <form method="POST" action="/testpage" class="Addjobform">
-        @csrf <!-- altijd nodig in Laravel -->
+        <form method="POST" action="/testpage" class="Addjobform">
+            @csrf <!-- altijd nodig in Laravel -->
 
-        <label for="title">Title:</label>
-        <input type="text" name="title" id="title" required>
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title" required>
 
-        <label for="salary">Salary:</label>
-        <input type="number" name="salary" id="salary" required>
+            <label for="salary">Salary:</label>
+            <input type="number" name="salary" id="salary" required>
 
-        <button type="submit">Add Job</button>
-    </form>
+            <button type="submit">Add Job</button>
+        </form>
+    </div>
 </x-layout>
