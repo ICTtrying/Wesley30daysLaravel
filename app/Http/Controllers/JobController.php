@@ -9,8 +9,17 @@ class JobController extends Controller
 {
     public function index()
     {
-    $jobs = Job::all();
-    return view('testpage', ['jobs' => $jobs]);
+    $jobs = Job::with('employer')->get();
+    return view('jobs', ['jobs' => $jobs]);
+    }
+
+    public function showjobs($id)
+    {
+        $job = Job::find($id);
+        if (!$job) {
+            abort(404, 'Job not found');
+        }
+        return view('job', ['job' => $job]); // verwijst naar resources/views/job.blade.php
     }
 
     public function addjob(Request $request)
