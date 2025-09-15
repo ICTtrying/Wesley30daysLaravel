@@ -24,6 +24,11 @@ class JobController extends Controller
 
     public function addjob(Request $request)
     {
+        $request->validate([
+            'title' => ['required', 'string', 'min:3', 'max:100'],
+            'salary' => 'required',
+        ]);
+
         Job::create([
             'title' => request('title'),
             'salary' => request('salary'),
