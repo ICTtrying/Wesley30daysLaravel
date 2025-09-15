@@ -8,8 +8,10 @@ use App\models\Job;
 
 Route::get('/', [homeController::class, 'index']);
 Route::get('/jobs', [JobController::class, 'index']);
+Route::get('/jobs/create', [JobController::class, 'createjob']);
+Route::post('/jobs', [JobController::class, 'addjob']);
 Route::get('/jobs/{id}', [JobController::class, 'showjobs']);
 Route::get('/contact', [contactController::class, 'index']);
 Route::get('/testpage', [testController::class, 'index']);
-Route::post('/testpage', [JobController::class, 'addjob']);
+Route::post('/testpage', [JobController::class, 'addjobtestpage']);
 ?>
