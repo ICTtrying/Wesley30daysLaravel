@@ -13,7 +13,7 @@ class JobController extends Controller
         return view('jobs.index', ['jobs' => $jobs]);
     }
 
-    public function showjobs($id)
+    public function showjob($id)
     {
         $job = Job::find($id);
         if (!$job) {
@@ -40,7 +40,7 @@ class JobController extends Controller
 
     public function createjob()
     {
-        return view('jobs.create'); // verwijst naar resources/views/createjob.blade.php
+        return view('jobs.create');
     }
 
     public function addjobtestpage(Request $request)
@@ -53,8 +53,45 @@ class JobController extends Controller
         Job::create([
             'title' => $request->input('title'),
             'salary' => $request->input('salary'),
-            'employer_id' => rand(1, 10) // Random employer_id for demonstration
+            'employer_id' => rand(1, 10)
         ]);
         return redirect('testpage')->with('success', 'Job added!');
     }
+
+    public function editjobpage($id)
+    {
+        $job = Job::find($id);
+        if (!$job) {
+            abort(404, 'Job not found');
+        }
+        return view('jobs.edit', ['job' => $job]);
+    }
+
+    public function updatejob(Request $request, $id)
+    {
+        $request->validate([
+            'title' => ['required', 'string', 'min:3', 'max:100'],
+            'salary' => 'required',
+        ]);
+
+        $job = Job::findOrFail($id);
+
+        $job->update([
+            'title' => $request->input('title'),
+            'salary' => $request->input('salary'),
+        ]);
+
+        return redirect("/jobs/{$job->id}");
+    }
+
+    public function deletejob($id)
+    {
+        
+        $job = Job::findOrFail($id);
+
+        $job->delete();
+
+        return redirect('/jobs');
+    }
+        
 }
