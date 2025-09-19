@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('job__listing', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(App\Models\Employer::class);
+            $table->foreignIdFor(Employer::class);
             $table->string('title');
             $table->decimal('salary', 8, 2);
             $table->timestamps();

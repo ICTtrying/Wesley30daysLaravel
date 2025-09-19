@@ -24,7 +24,4 @@ Route::delete('/jobs/{id}/', [JobController::class, 'deletejob']);
 //contact page 
 Route::get('/contact', [contactController::class, 'index']);
 //test page
-Route::get('/testpage', [testController::class, 'index']);
-//saves new job to database from test page
-Route::post('/testpage', [JobController::class, 'addjobtestpage']);
 ?>
