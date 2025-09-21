@@ -13,12 +13,8 @@ class JobController extends Controller
         return view('jobs.index', ['jobs' => $jobs]);
     }
 
-    public function showjob($id)
+    public function showjob(Job $job)
     {
-        $job = Job::find($id);
-        if (!$job) {
-            abort(404, 'Job not found');
-        }
         return view('jobs.show', ['job' => $job]); // verwijst naar resources/views/job.blade.php
     }
 
@@ -58,23 +54,17 @@ class JobController extends Controller
         return redirect('testpage')->with('success', 'Job added!');
     }
 
-    public function editjobpage($id)
+    public function editjobpage(Job $job)
     {
-        $job = Job::find($id);
-        if (!$job) {
-            abort(404, 'Job not found');
-        }
         return view('jobs.edit', ['job' => $job]);
     }
 
-    public function updatejob(Request $request, $id)
+    public function updatejob(Request $request, Job $job)
     {
         $request->validate([
             'title' => ['required', 'string', 'min:3', 'max:100'],
             'salary' => 'required',
         ]);
-
-        $job = Job::findOrFail($id);
 
         $job->update([
             'title' => $request->input('title'),
@@ -84,10 +74,8 @@ class JobController extends Controller
         return redirect("/jobs/{$job->id}");
     }
 
-    public function deletejob($id)
+    public function deletejob(Job $job)
     {
-        
-        $job = Job::findOrFail($id);
 
         $job->delete();
 
