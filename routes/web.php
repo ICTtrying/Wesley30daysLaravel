@@ -1,36 +1,45 @@
 <?php
-use App\Http\Controllers\JobController;
+
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\homeController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(JobController::class)->group(function () {
-    //shows all jobs
+    // shows all jobs
     Route::get('/jobs', 'index');
-    //shows create job form
+    // shows create job form
     Route::get('/jobs/create', 'createjob');
-    //saves new job to database
+    // saves new job to database
     Route::post('/jobs', 'addjob');
-    //shows single job
+    // shows single job
     Route::get('/jobs/{job}', 'showjob');
-    //edit single job
+    // edit single job
     Route::get('/jobs/{job}/edit', 'editjobpage');
-    //updates job in database
+    // updates job in database
     Route::patch('/jobs/{job}/', 'updatejob');
-    //destroy job in database
+    // destroy job in database
     Route::delete('/jobs/{job}/', 'deletejob');
 });
 
-//shows homepage
-    Route::get('/', [homeController::class, 'index']);
+// shows homepage
+Route::get('/', [homeController::class, 'index']);
 
-    //contact page 
-    Route::get('/contact', [contactController::class, 'index']);
+// contact page
+Route::get('/contact', [contactController::class, 'index']);
 
-Route::get('/register', [RegisterUserController::class, 'create']);
-Route::post('/register', [RegisterUserController::class,'store']);
+Route::controller(RegisterUserController::class)->group(function () {
+    Route::get('/register', 'create');
+    Route::post('/register', 'store');
+});
 
-Route::get('/login', [SessionController::class, 'create']);
-Route::post('/login', [SessionController::class, 'store']);
+// login
+Route::controller(SessionController::class)->group(function () {
+    Route::get('/login', 'create');
+    Route::post('/login', 'store');
+});
+
+// logout route
+Route::post('/logout', [SessionController::class, 'destroy']);
