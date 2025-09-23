@@ -5,6 +5,7 @@ use App\Http\Controllers\homeController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(JobController::class)->group(function () {
@@ -13,11 +14,11 @@ Route::controller(JobController::class)->group(function () {
     // shows create job form
     Route::get('/jobs/create', 'createjob');
     // saves new job to database
-    Route::post('/jobs', 'addjob');
+    Route::post('/jobs', 'addjob')->middleware('auth');
     // shows single job
     Route::get('/jobs/{job}', 'showjob');
     // edit single job
-    Route::get('/jobs/{job}/edit', 'editjobpage');
+    Route::get('/jobs/{job}/edit', 'editjobpage')->Middleware('auth', 'can:edit-job,job');
     // updates job in database
     Route::patch('/jobs/{job}/', 'updatejob');
     // destroy job in database

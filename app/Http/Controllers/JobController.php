@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class JobController extends Controller
 {
     public function index()
     {
         $jobs = Job::with('employer')->latest()->simplePaginate(3);
+
         return view('jobs.index', ['jobs' => $jobs]);
     }
 
@@ -28,7 +30,7 @@ class JobController extends Controller
         Job::create([
             'title' => request('title'),
             'salary' => request('salary'),
-            'employer_id' => 1
+            'employer_id' => 1,
         ]);
 
         return redirect('/jobs');
@@ -49,13 +51,15 @@ class JobController extends Controller
         Job::create([
             'title' => $request->input('title'),
             'salary' => $request->input('salary'),
-            'employer_id' => rand(1, 10)
+            'employer_id' => '1',
         ]);
+
         return redirect('testpage')->with('success', 'Job added!');
     }
 
     public function editjobpage(Job $job)
     {
+
         return view('jobs.edit', ['job' => $job]);
     }
 
@@ -76,10 +80,8 @@ class JobController extends Controller
 
     public function deletejob(Job $job)
     {
-
         $job->delete();
 
         return redirect('/jobs');
     }
-        
 }
