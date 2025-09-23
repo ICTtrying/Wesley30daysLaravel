@@ -5,8 +5,8 @@ use App\Http\Controllers\homeController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
+
 
 Route::controller(JobController::class)->group(function () {
     // shows all jobs
