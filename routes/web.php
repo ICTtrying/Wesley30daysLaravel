@@ -18,7 +18,7 @@ Route::controller(JobController::class)->group(function () {
     // shows single job
     Route::get('/jobs/{job}', 'showjob');
     // edit single job
-    Route::get('/jobs/{job}/edit', 'editjobpage')->Middleware('auth', 'can:edit-job,job');
+    Route::get('/jobs/{job}/edit', 'editjobpage')->middleware('auth')->can('edit', 'job');
     // updates job in database
     Route::patch('/jobs/{job}/', 'updatejob');
     // destroy job in database
